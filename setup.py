@@ -33,7 +33,9 @@ dev_requires = [
     'tox-conda==0.2.0',
     'twine',
     'setuptools',
-    'pycodestyle'
+    'pycodestyle',
+    'sphinx',
+    'recommonmark',
 ]
 
 test_requires = [
