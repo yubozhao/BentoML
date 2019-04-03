@@ -14,15 +14,8 @@
 .. You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Welcome to BentoML's documentation!
-===================================
 
-.. toctree::
-   :maxdepth: 4
+API Reference
+=============
 
-   quick_start
-   faq
-   tutorials
-   api_reference
-   deployment
-   license
+docs

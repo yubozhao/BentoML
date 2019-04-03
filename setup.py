@@ -36,6 +36,7 @@ dev_requires = [
     'pycodestyle',
     'sphinx',
     'recommonmark',
+    'sphinx-better-theme',
 ]
 
 test_requires = [
