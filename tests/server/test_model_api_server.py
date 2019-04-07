@@ -2,10 +2,12 @@ import os
 import json
 import uuid
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-import bentoml
+from bentoml import BentoModel, load, api
 from bentoml.server import BentoModelApiServer
+from bentoml.handlers import DataframeHandler
+from bentoml.artifacts import PickleArtifact
 
 BASE_TEST_PATH = "/tmp/bentoml-test"
 
@@ -17,15 +19,15 @@ class MyFakeModel(object):
         return df
 
 
-class RestServiceTestModel(bentoml.BentoModel):
+class RestServiceTestModel(BentoModel):
     """
     My RestServiceTestModel packaging with BentoML
     """
 
     def config(self, artifacts, env):
-        artifacts.add(bentoml.artifacts.PickleArtifact('fake_model'))
+        artifacts.add(PickleArtifact('fake_model'))
 
-    @bentoml.api(bentoml.handlers.DataframeHandler, options={'input_columns_require': ['age']})
+    @api(DataframeHandler, options={'input_columns_require': ['age']})
     def predict(self, df):
         """
         predict expects dataframe as input
@@ -40,7 +42,7 @@ def create_rest_server():
     sm.save(BASE_TEST_PATH, version=version)
 
     model_path = os.path.join(BASE_TEST_PATH, 'RestServiceTestModel', version)
-    model_service = bentoml.load(model_path)
+    model_service = load(model_path)
     model_service.load()
 
     rest_server = BentoModelApiServer('test_rest_server', model_service, 5000)
