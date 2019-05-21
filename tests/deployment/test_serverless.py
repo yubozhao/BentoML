@@ -2,17 +2,21 @@ import os
 import sys
 import pytest
 
-from unittest.mock import MagicMock, Mock, patch
+try:
+  from unittest.mock import MagicMock, Mock, patch
+except ImportError:
+  from mock import MagicMock, Mock, patch
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
+import bentoml
 from bentoml.utils.exceptions import BentoMLException
 from bentoml.deployment.serverless import check_serverless_compatiable_version, \
   ServerlessDeployment  # noqa: E402
 
 
 def test_serverless_version():
-    with patch('bentoml.utils.whichcraft.which', return_vaue='Not None'):
+    with patch('bentoml.utils.whichcraft.which', return_value='Not None'):
         with patch(
             'bentoml.deployment.serverless.invoke_serverless_command',
             return_value=['1.40.0']
