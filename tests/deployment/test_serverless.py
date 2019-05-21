@@ -33,7 +33,7 @@ def test_serverless_version():
 
 
 def test_deploy_serverless(bento_archive_path):
-    with patch('bentoml.utils.whichcraft.which', return_vaue='Not None'):
+    with patch('bentoml.utils.whichcraft.which', return_value='Not None'):
         with patch.object(ServerlessDeployment, '_generate_bundle', return_value='fake_output'):
             deployment = ServerlessDeployment(bento_archive_path, 'aws-lambda', 'us-west-2', 'dev')
             with patch(
@@ -52,7 +52,7 @@ def test_deploy_serverless(bento_archive_path):
 
 
 def test_delete_serverless(bento_archive_path):
-    with patch('bentoml.utils.whichcraft.which', return_vaue='Not None'):
+    with patch('bentoml.utils.whichcraft.which', return_value='Not None'):
         deployment = ServerlessDeployment(bento_archive_path, 'aws-lambda', 'us-west-2', 'dev')
 
         with patch(
