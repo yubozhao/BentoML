@@ -37,7 +37,8 @@ dev_requires = [
     'twine',
     'setuptools',
     'pycodestyle',
-    'gitpython>=2.0.2'
+    'gitpython>=2.0.2',
+    'moto'
 ]
 
 cv2 = [ 'opencv-python' ]
