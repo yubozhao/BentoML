@@ -37,8 +37,7 @@ dev_requires = [
     'twine',
     'setuptools',
     'pycodestyle',
-    'gitpython>=2.0.2',
-    'moto'
+    'gitpython>=2.0.2'
 ]
 
 cv2 = [ 'opencv-python' ]
@@ -53,10 +52,11 @@ tests_require = [
     'pytest==4.4.0',
     'snapshottest==0.5.0',
     'mock==2.0.0',
-    'tox==3.8.4'
+    'tox==3.8.4',
     # 'pytest-cov',
     # 'coverage',
     # 'codecov'
+    'mock'
 ]
 tests_require += cv2
 
