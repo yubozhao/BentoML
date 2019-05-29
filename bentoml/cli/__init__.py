@@ -30,6 +30,7 @@ from bentoml.server.gunicorn_server import GunicornApplication, get_gunicorn_wor
 from bentoml.cli.click_utils import DefaultCommandGroup, conditional_argument
 from bentoml.deployment.serverless import ServerlessDeployment
 from bentoml.deployment.sagemaker import SagemakerDeployment
+from bentoml.deployment.clipper import ClipperDeployment
 from bentoml.utils.exceptions import BentoMLException
 
 SERVERLESS_PLATFORMS = ['aws-lambda', 'aws-lambda-py2', 'gcp-function']
@@ -156,6 +157,8 @@ def cli():
         elif platform == 'aws-sagemaker':
             deployment = SagemakerDeployment(archive_path, api_name, region, instance_count,
                                              instance_type)
+        elif platform == 'clipper':
+            deployment = ClipperDeployment(archive_path, api_name)
         else:
             raise BentoMLException('Deploying with "--platform=%s" is not supported ' % platform +
                                    'in the current version of BentoML')
