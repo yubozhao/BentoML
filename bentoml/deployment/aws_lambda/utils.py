@@ -62,12 +62,6 @@ def cleanup_build_files(project_dir, api_name):
         if 'tests' in dirs:
             logger.debug('removing dir: %s', os.path.join(root, 'tests'))
             shutil.rmtree(os.path.join(root, 'tests'))
-        if 'test' in dirs:
-            logger.debug('removing dir: %s', os.path.join(root, 'test'))
-            shutil.rmtree(os.path.join(root, 'test'))
-        if 'examples' in dirs:
-            logger.debug('removing dir: %s', os.path.join(root, 'examples'))
-            shutil.rmtree(os.path.join(root, 'examples'))
         if '__pycache__' in dirs:
             logger.debug('removing dir: %s', os.path.join(root, '__pycache__'))
             shutil.rmtree(os.path.join(root, '__pycache__'))
@@ -293,11 +287,7 @@ def reduce_bundle_size_and_upload_extra_resources_to_s3(
         for item in os.listdir(build_directory)
     )
 
-    required_bundle_list = [
-        'app.py',
-        '__init__.py',
-        'download_extra_resources.py',
-    ]
+    required_bundle_list = ['app.py', '__init__.py', 'download_extra_resources.py']
     required_bundle_size = sum(dir_name_to_size[i] for i in required_bundle_list)
     for name, size in sorted(
         dir_name_to_size.items(), key=lambda i: i[1], reverse=True
