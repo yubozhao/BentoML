@@ -114,9 +114,10 @@ def get_arn_role_from_current_aws_user():
         for role in role_list["Roles"]:
             policy_document = role["AssumeRolePolicyDocument"]
             statement = policy_document["Statement"][0]
+            principal_service = statement['Principal'].get('Service', None)
             if (
                 statement["Effect"] == "Allow"
-                and statement["Principal"]["Service"] == "sagemaker.amazonaws.com"
+                and principal_service == "sagemaker.amazonaws.com"
             ):
                 arn = role["Arn"]
         if arn is None:
