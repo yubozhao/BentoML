@@ -76,5 +76,3 @@ def test_onnx_model_artifact_pack_model_file_path_with_onnxruntime_backend(
     # clean up saved bundle
     yc = YataiClient()
     yc.repository.dangerously_delete_bento(svc.name, svc.version)
-
-    assert False 'intentionally failed'
