@@ -2420,6 +2420,612 @@ export const bentoml = $root.bentoml = (() => {
         return DeploymentStatus;
     })();
 
+    bentoml.DeploymentEvent = (function() {
+
+        /**
+         * Properties of a DeploymentEvent.
+         * @memberof bentoml
+         * @interface IDeploymentEvent
+         * @property {string|null} [id] DeploymentEvent id
+         * @property {string|null} [namespace] DeploymentEvent namespace
+         * @property {string|null} [name] DeploymentEvent name
+         * @property {bentoml.IDeploymentSpec|null} [spec] DeploymentEvent spec
+         * @property {bentoml.DeploymentEvent.EventType|null} [event_type] DeploymentEvent event_type
+         * @property {bentoml.DeploymentEvent.IEventStatus|null} [status] DeploymentEvent status
+         * @property {google.protobuf.ITimestamp|null} [created_at] DeploymentEvent created_at
+         */
+
+        /**
+         * Constructs a new DeploymentEvent.
+         * @memberof bentoml
+         * @classdesc Represents a DeploymentEvent.
+         * @implements IDeploymentEvent
+         * @constructor
+         * @param {bentoml.IDeploymentEvent=} [properties] Properties to set
+         */
+        function DeploymentEvent(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * DeploymentEvent id.
+         * @member {string} id
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.id = "";
+
+        /**
+         * DeploymentEvent namespace.
+         * @member {string} namespace
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.namespace = "";
+
+        /**
+         * DeploymentEvent name.
+         * @member {string} name
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.name = "";
+
+        /**
+         * DeploymentEvent spec.
+         * @member {bentoml.IDeploymentSpec|null|undefined} spec
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.spec = null;
+
+        /**
+         * DeploymentEvent event_type.
+         * @member {bentoml.DeploymentEvent.EventType} event_type
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.event_type = 0;
+
+        /**
+         * DeploymentEvent status.
+         * @member {bentoml.DeploymentEvent.IEventStatus|null|undefined} status
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.status = null;
+
+        /**
+         * DeploymentEvent created_at.
+         * @member {google.protobuf.ITimestamp|null|undefined} created_at
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         */
+        DeploymentEvent.prototype.created_at = null;
+
+        /**
+         * Creates a new DeploymentEvent instance using the specified properties.
+         * @function create
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {bentoml.IDeploymentEvent=} [properties] Properties to set
+         * @returns {bentoml.DeploymentEvent} DeploymentEvent instance
+         */
+        DeploymentEvent.create = function create(properties) {
+            return new DeploymentEvent(properties);
+        };
+
+        /**
+         * Encodes the specified DeploymentEvent message. Does not implicitly {@link bentoml.DeploymentEvent.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {bentoml.IDeploymentEvent} message DeploymentEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DeploymentEvent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespace);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+            if (message.spec != null && Object.hasOwnProperty.call(message, "spec"))
+                $root.bentoml.DeploymentSpec.encode(message.spec, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.event_type != null && Object.hasOwnProperty.call(message, "event_type"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.event_type);
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                $root.bentoml.DeploymentEvent.EventStatus.encode(message.status, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.created_at != null && Object.hasOwnProperty.call(message, "created_at"))
+                $root.google.protobuf.Timestamp.encode(message.created_at, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified DeploymentEvent message, length delimited. Does not implicitly {@link bentoml.DeploymentEvent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {bentoml.IDeploymentEvent} message DeploymentEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DeploymentEvent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a DeploymentEvent message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.DeploymentEvent} DeploymentEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DeploymentEvent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.DeploymentEvent();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.namespace = reader.string();
+                    break;
+                case 3:
+                    message.name = reader.string();
+                    break;
+                case 4:
+                    message.spec = $root.bentoml.DeploymentSpec.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.event_type = reader.int32();
+                    break;
+                case 6:
+                    message.status = $root.bentoml.DeploymentEvent.EventStatus.decode(reader, reader.uint32());
+                    break;
+                case 7:
+                    message.created_at = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a DeploymentEvent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.DeploymentEvent} DeploymentEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DeploymentEvent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a DeploymentEvent message.
+         * @function verify
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        DeploymentEvent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                if (!$util.isString(message.namespace))
+                    return "namespace: string expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.spec != null && message.hasOwnProperty("spec")) {
+                let error = $root.bentoml.DeploymentSpec.verify(message.spec);
+                if (error)
+                    return "spec." + error;
+            }
+            if (message.event_type != null && message.hasOwnProperty("event_type"))
+                switch (message.event_type) {
+                default:
+                    return "event_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.status != null && message.hasOwnProperty("status")) {
+                let error = $root.bentoml.DeploymentEvent.EventStatus.verify(message.status);
+                if (error)
+                    return "status." + error;
+            }
+            if (message.created_at != null && message.hasOwnProperty("created_at")) {
+                let error = $root.google.protobuf.Timestamp.verify(message.created_at);
+                if (error)
+                    return "created_at." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a DeploymentEvent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.DeploymentEvent} DeploymentEvent
+         */
+        DeploymentEvent.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.DeploymentEvent)
+                return object;
+            let message = new $root.bentoml.DeploymentEvent();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.namespace != null)
+                message.namespace = String(object.namespace);
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.spec != null) {
+                if (typeof object.spec !== "object")
+                    throw TypeError(".bentoml.DeploymentEvent.spec: object expected");
+                message.spec = $root.bentoml.DeploymentSpec.fromObject(object.spec);
+            }
+            switch (object.event_type) {
+            case "CREATE":
+            case 0:
+                message.event_type = 0;
+                break;
+            case "UPDATE":
+            case 1:
+                message.event_type = 1;
+                break;
+            case "DELETE":
+            case 2:
+                message.event_type = 2;
+                break;
+            }
+            if (object.status != null) {
+                if (typeof object.status !== "object")
+                    throw TypeError(".bentoml.DeploymentEvent.status: object expected");
+                message.status = $root.bentoml.DeploymentEvent.EventStatus.fromObject(object.status);
+            }
+            if (object.created_at != null) {
+                if (typeof object.created_at !== "object")
+                    throw TypeError(".bentoml.DeploymentEvent.created_at: object expected");
+                message.created_at = $root.google.protobuf.Timestamp.fromObject(object.created_at);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a DeploymentEvent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.DeploymentEvent
+         * @static
+         * @param {bentoml.DeploymentEvent} message DeploymentEvent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        DeploymentEvent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.namespace = "";
+                object.name = "";
+                object.spec = null;
+                object.event_type = options.enums === String ? "CREATE" : 0;
+                object.status = null;
+                object.created_at = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                object.namespace = message.namespace;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.spec != null && message.hasOwnProperty("spec"))
+                object.spec = $root.bentoml.DeploymentSpec.toObject(message.spec, options);
+            if (message.event_type != null && message.hasOwnProperty("event_type"))
+                object.event_type = options.enums === String ? $root.bentoml.DeploymentEvent.EventType[message.event_type] : message.event_type;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = $root.bentoml.DeploymentEvent.EventStatus.toObject(message.status, options);
+            if (message.created_at != null && message.hasOwnProperty("created_at"))
+                object.created_at = $root.google.protobuf.Timestamp.toObject(message.created_at, options);
+            return object;
+        };
+
+        /**
+         * Converts this DeploymentEvent to JSON.
+         * @function toJSON
+         * @memberof bentoml.DeploymentEvent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        DeploymentEvent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * EventType enum.
+         * @name bentoml.DeploymentEvent.EventType
+         * @enum {number}
+         * @property {number} CREATE=0 CREATE value
+         * @property {number} UPDATE=1 UPDATE value
+         * @property {number} DELETE=2 DELETE value
+         */
+        DeploymentEvent.EventType = (function() {
+            const valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "CREATE"] = 0;
+            values[valuesById[1] = "UPDATE"] = 1;
+            values[valuesById[2] = "DELETE"] = 2;
+            return values;
+        })();
+
+        DeploymentEvent.EventStatus = (function() {
+
+            /**
+             * Properties of an EventStatus.
+             * @memberof bentoml.DeploymentEvent
+             * @interface IEventStatus
+             * @property {bentoml.DeploymentEvent.EventStatus.State|null} [state] EventStatus state
+             * @property {string|null} [error_message] EventStatus error_message
+             */
+
+            /**
+             * Constructs a new EventStatus.
+             * @memberof bentoml.DeploymentEvent
+             * @classdesc Represents an EventStatus.
+             * @implements IEventStatus
+             * @constructor
+             * @param {bentoml.DeploymentEvent.IEventStatus=} [properties] Properties to set
+             */
+            function EventStatus(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * EventStatus state.
+             * @member {bentoml.DeploymentEvent.EventStatus.State} state
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @instance
+             */
+            EventStatus.prototype.state = 0;
+
+            /**
+             * EventStatus error_message.
+             * @member {string} error_message
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @instance
+             */
+            EventStatus.prototype.error_message = "";
+
+            /**
+             * Creates a new EventStatus instance using the specified properties.
+             * @function create
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {bentoml.DeploymentEvent.IEventStatus=} [properties] Properties to set
+             * @returns {bentoml.DeploymentEvent.EventStatus} EventStatus instance
+             */
+            EventStatus.create = function create(properties) {
+                return new EventStatus(properties);
+            };
+
+            /**
+             * Encodes the specified EventStatus message. Does not implicitly {@link bentoml.DeploymentEvent.EventStatus.verify|verify} messages.
+             * @function encode
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {bentoml.DeploymentEvent.IEventStatus} message EventStatus message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            EventStatus.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                if (message.error_message != null && Object.hasOwnProperty.call(message, "error_message"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.error_message);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified EventStatus message, length delimited. Does not implicitly {@link bentoml.DeploymentEvent.EventStatus.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {bentoml.DeploymentEvent.IEventStatus} message EventStatus message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            EventStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an EventStatus message from the specified reader or buffer.
+             * @function decode
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {bentoml.DeploymentEvent.EventStatus} EventStatus
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            EventStatus.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.DeploymentEvent.EventStatus();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.state = reader.int32();
+                        break;
+                    case 2:
+                        message.error_message = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an EventStatus message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {bentoml.DeploymentEvent.EventStatus} EventStatus
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            EventStatus.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an EventStatus message.
+             * @function verify
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            EventStatus.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.state != null && message.hasOwnProperty("state"))
+                    switch (message.state) {
+                    default:
+                        return "state: enum value expected";
+                    case 0:
+                    case 1:
+                        break;
+                    }
+                if (message.error_message != null && message.hasOwnProperty("error_message"))
+                    if (!$util.isString(message.error_message))
+                        return "error_message: string expected";
+                return null;
+            };
+
+            /**
+             * Creates an EventStatus message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {bentoml.DeploymentEvent.EventStatus} EventStatus
+             */
+            EventStatus.fromObject = function fromObject(object) {
+                if (object instanceof $root.bentoml.DeploymentEvent.EventStatus)
+                    return object;
+                let message = new $root.bentoml.DeploymentEvent.EventStatus();
+                switch (object.state) {
+                case "SUCCEEDED":
+                case 0:
+                    message.state = 0;
+                    break;
+                case "FAILED":
+                case 1:
+                    message.state = 1;
+                    break;
+                }
+                if (object.error_message != null)
+                    message.error_message = String(object.error_message);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an EventStatus message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @static
+             * @param {bentoml.DeploymentEvent.EventStatus} message EventStatus
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            EventStatus.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                let object = {};
+                if (options.defaults) {
+                    object.state = options.enums === String ? "SUCCEEDED" : 0;
+                    object.error_message = "";
+                }
+                if (message.state != null && message.hasOwnProperty("state"))
+                    object.state = options.enums === String ? $root.bentoml.DeploymentEvent.EventStatus.State[message.state] : message.state;
+                if (message.error_message != null && message.hasOwnProperty("error_message"))
+                    object.error_message = message.error_message;
+                return object;
+            };
+
+            /**
+             * Converts this EventStatus to JSON.
+             * @function toJSON
+             * @memberof bentoml.DeploymentEvent.EventStatus
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            EventStatus.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * State enum.
+             * @name bentoml.DeploymentEvent.EventStatus.State
+             * @enum {number}
+             * @property {number} SUCCEEDED=0 SUCCEEDED value
+             * @property {number} FAILED=1 FAILED value
+             */
+            EventStatus.State = (function() {
+                const valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "SUCCEEDED"] = 0;
+                values[valuesById[1] = "FAILED"] = 1;
+                return values;
+            })();
+
+            return EventStatus;
+        })();
+
+        return DeploymentEvent;
+    })();
+
     bentoml.ApplyDeploymentRequest = (function() {
 
         /**
@@ -4725,6 +5331,1406 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         return ListDeploymentsResponse;
+    })();
+
+    bentoml.ListDeploymentEventsRequest = (function() {
+
+        /**
+         * Properties of a ListDeploymentEventsRequest.
+         * @memberof bentoml
+         * @interface IListDeploymentEventsRequest
+         * @property {string|null} [name] ListDeploymentEventsRequest name
+         * @property {string|null} [namespace] ListDeploymentEventsRequest namespace
+         * @property {bentoml.DeploymentSpec.DeploymentOperator|null} [operator] ListDeploymentEventsRequest operator
+         * @property {bentoml.DeploymentEvent.EventType|null} [event_type] ListDeploymentEventsRequest event_type
+         * @property {bentoml.DeploymentEvent.EventStatus.State|null} [status] ListDeploymentEventsRequest status
+         * @property {number|null} [offset] ListDeploymentEventsRequest offset
+         * @property {number|null} [limit] ListDeploymentEventsRequest limit
+         * @property {boolean|null} [ascending_order] ListDeploymentEventsRequest ascending_order
+         */
+
+        /**
+         * Constructs a new ListDeploymentEventsRequest.
+         * @memberof bentoml
+         * @classdesc Represents a ListDeploymentEventsRequest.
+         * @implements IListDeploymentEventsRequest
+         * @constructor
+         * @param {bentoml.IListDeploymentEventsRequest=} [properties] Properties to set
+         */
+        function ListDeploymentEventsRequest(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ListDeploymentEventsRequest name.
+         * @member {string} name
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.name = "";
+
+        /**
+         * ListDeploymentEventsRequest namespace.
+         * @member {string} namespace
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.namespace = "";
+
+        /**
+         * ListDeploymentEventsRequest operator.
+         * @member {bentoml.DeploymentSpec.DeploymentOperator} operator
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.operator = 0;
+
+        /**
+         * ListDeploymentEventsRequest event_type.
+         * @member {bentoml.DeploymentEvent.EventType} event_type
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.event_type = 0;
+
+        /**
+         * ListDeploymentEventsRequest status.
+         * @member {bentoml.DeploymentEvent.EventStatus.State} status
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.status = 0;
+
+        /**
+         * ListDeploymentEventsRequest offset.
+         * @member {number} offset
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.offset = 0;
+
+        /**
+         * ListDeploymentEventsRequest limit.
+         * @member {number} limit
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.limit = 0;
+
+        /**
+         * ListDeploymentEventsRequest ascending_order.
+         * @member {boolean} ascending_order
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         */
+        ListDeploymentEventsRequest.prototype.ascending_order = false;
+
+        /**
+         * Creates a new ListDeploymentEventsRequest instance using the specified properties.
+         * @function create
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {bentoml.IListDeploymentEventsRequest=} [properties] Properties to set
+         * @returns {bentoml.ListDeploymentEventsRequest} ListDeploymentEventsRequest instance
+         */
+        ListDeploymentEventsRequest.create = function create(properties) {
+            return new ListDeploymentEventsRequest(properties);
+        };
+
+        /**
+         * Encodes the specified ListDeploymentEventsRequest message. Does not implicitly {@link bentoml.ListDeploymentEventsRequest.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {bentoml.IListDeploymentEventsRequest} message ListDeploymentEventsRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ListDeploymentEventsRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespace);
+            if (message.operator != null && Object.hasOwnProperty.call(message, "operator"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.operator);
+            if (message.event_type != null && Object.hasOwnProperty.call(message, "event_type"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.event_type);
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.status);
+            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.offset);
+            if (message.limit != null && Object.hasOwnProperty.call(message, "limit"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.limit);
+            if (message.ascending_order != null && Object.hasOwnProperty.call(message, "ascending_order"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.ascending_order);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ListDeploymentEventsRequest message, length delimited. Does not implicitly {@link bentoml.ListDeploymentEventsRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {bentoml.IListDeploymentEventsRequest} message ListDeploymentEventsRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ListDeploymentEventsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.ListDeploymentEventsRequest} ListDeploymentEventsRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ListDeploymentEventsRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.ListDeploymentEventsRequest();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.name = reader.string();
+                    break;
+                case 2:
+                    message.namespace = reader.string();
+                    break;
+                case 3:
+                    message.operator = reader.int32();
+                    break;
+                case 4:
+                    message.event_type = reader.int32();
+                    break;
+                case 5:
+                    message.status = reader.int32();
+                    break;
+                case 6:
+                    message.offset = reader.int32();
+                    break;
+                case 7:
+                    message.limit = reader.int32();
+                    break;
+                case 8:
+                    message.ascending_order = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.ListDeploymentEventsRequest} ListDeploymentEventsRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ListDeploymentEventsRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ListDeploymentEventsRequest message.
+         * @function verify
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ListDeploymentEventsRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                if (!$util.isString(message.namespace))
+                    return "namespace: string expected";
+            if (message.operator != null && message.hasOwnProperty("operator"))
+                switch (message.operator) {
+                default:
+                    return "operator: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                }
+            if (message.event_type != null && message.hasOwnProperty("event_type"))
+                switch (message.event_type) {
+                default:
+                    return "event_type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.status != null && message.hasOwnProperty("status"))
+                switch (message.status) {
+                default:
+                    return "status: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
+            if (message.offset != null && message.hasOwnProperty("offset"))
+                if (!$util.isInteger(message.offset))
+                    return "offset: integer expected";
+            if (message.limit != null && message.hasOwnProperty("limit"))
+                if (!$util.isInteger(message.limit))
+                    return "limit: integer expected";
+            if (message.ascending_order != null && message.hasOwnProperty("ascending_order"))
+                if (typeof message.ascending_order !== "boolean")
+                    return "ascending_order: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a ListDeploymentEventsRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.ListDeploymentEventsRequest} ListDeploymentEventsRequest
+         */
+        ListDeploymentEventsRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.ListDeploymentEventsRequest)
+                return object;
+            let message = new $root.bentoml.ListDeploymentEventsRequest();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.namespace != null)
+                message.namespace = String(object.namespace);
+            switch (object.operator) {
+            case "UNSET":
+            case 0:
+                message.operator = 0;
+                break;
+            case "CUSTOM":
+            case 1:
+                message.operator = 1;
+                break;
+            case "AWS_SAGEMAKER":
+            case 2:
+                message.operator = 2;
+                break;
+            case "AWS_LAMBDA":
+            case 3:
+                message.operator = 3;
+                break;
+            case "AZURE_FUNCTIONS":
+            case 4:
+                message.operator = 4;
+                break;
+            }
+            switch (object.event_type) {
+            case "CREATE":
+            case 0:
+                message.event_type = 0;
+                break;
+            case "UPDATE":
+            case 1:
+                message.event_type = 1;
+                break;
+            case "DELETE":
+            case 2:
+                message.event_type = 2;
+                break;
+            }
+            switch (object.status) {
+            case "SUCCEEDED":
+            case 0:
+                message.status = 0;
+                break;
+            case "FAILED":
+            case 1:
+                message.status = 1;
+                break;
+            }
+            if (object.offset != null)
+                message.offset = object.offset | 0;
+            if (object.limit != null)
+                message.limit = object.limit | 0;
+            if (object.ascending_order != null)
+                message.ascending_order = Boolean(object.ascending_order);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ListDeploymentEventsRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @static
+         * @param {bentoml.ListDeploymentEventsRequest} message ListDeploymentEventsRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ListDeploymentEventsRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults) {
+                object.name = "";
+                object.namespace = "";
+                object.operator = options.enums === String ? "UNSET" : 0;
+                object.event_type = options.enums === String ? "CREATE" : 0;
+                object.status = options.enums === String ? "SUCCEEDED" : 0;
+                object.offset = 0;
+                object.limit = 0;
+                object.ascending_order = false;
+            }
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                object.namespace = message.namespace;
+            if (message.operator != null && message.hasOwnProperty("operator"))
+                object.operator = options.enums === String ? $root.bentoml.DeploymentSpec.DeploymentOperator[message.operator] : message.operator;
+            if (message.event_type != null && message.hasOwnProperty("event_type"))
+                object.event_type = options.enums === String ? $root.bentoml.DeploymentEvent.EventType[message.event_type] : message.event_type;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = options.enums === String ? $root.bentoml.DeploymentEvent.EventStatus.State[message.status] : message.status;
+            if (message.offset != null && message.hasOwnProperty("offset"))
+                object.offset = message.offset;
+            if (message.limit != null && message.hasOwnProperty("limit"))
+                object.limit = message.limit;
+            if (message.ascending_order != null && message.hasOwnProperty("ascending_order"))
+                object.ascending_order = message.ascending_order;
+            return object;
+        };
+
+        /**
+         * Converts this ListDeploymentEventsRequest to JSON.
+         * @function toJSON
+         * @memberof bentoml.ListDeploymentEventsRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ListDeploymentEventsRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ListDeploymentEventsRequest;
+    })();
+
+    bentoml.GetDeploymentEventRequest = (function() {
+
+        /**
+         * Properties of a GetDeploymentEventRequest.
+         * @memberof bentoml
+         * @interface IGetDeploymentEventRequest
+         * @property {string|null} [id] GetDeploymentEventRequest id
+         */
+
+        /**
+         * Constructs a new GetDeploymentEventRequest.
+         * @memberof bentoml
+         * @classdesc Represents a GetDeploymentEventRequest.
+         * @implements IGetDeploymentEventRequest
+         * @constructor
+         * @param {bentoml.IGetDeploymentEventRequest=} [properties] Properties to set
+         */
+        function GetDeploymentEventRequest(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GetDeploymentEventRequest id.
+         * @member {string} id
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @instance
+         */
+        GetDeploymentEventRequest.prototype.id = "";
+
+        /**
+         * Creates a new GetDeploymentEventRequest instance using the specified properties.
+         * @function create
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {bentoml.IGetDeploymentEventRequest=} [properties] Properties to set
+         * @returns {bentoml.GetDeploymentEventRequest} GetDeploymentEventRequest instance
+         */
+        GetDeploymentEventRequest.create = function create(properties) {
+            return new GetDeploymentEventRequest(properties);
+        };
+
+        /**
+         * Encodes the specified GetDeploymentEventRequest message. Does not implicitly {@link bentoml.GetDeploymentEventRequest.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {bentoml.IGetDeploymentEventRequest} message GetDeploymentEventRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetDeploymentEventRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetDeploymentEventRequest message, length delimited. Does not implicitly {@link bentoml.GetDeploymentEventRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {bentoml.IGetDeploymentEventRequest} message GetDeploymentEventRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetDeploymentEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetDeploymentEventRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.GetDeploymentEventRequest} GetDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetDeploymentEventRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.GetDeploymentEventRequest();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GetDeploymentEventRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.GetDeploymentEventRequest} GetDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetDeploymentEventRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetDeploymentEventRequest message.
+         * @function verify
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetDeploymentEventRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a GetDeploymentEventRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.GetDeploymentEventRequest} GetDeploymentEventRequest
+         */
+        GetDeploymentEventRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.GetDeploymentEventRequest)
+                return object;
+            let message = new $root.bentoml.GetDeploymentEventRequest();
+            if (object.id != null)
+                message.id = String(object.id);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GetDeploymentEventRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @static
+         * @param {bentoml.GetDeploymentEventRequest} message GetDeploymentEventRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetDeploymentEventRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                object.id = "";
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            return object;
+        };
+
+        /**
+         * Converts this GetDeploymentEventRequest to JSON.
+         * @function toJSON
+         * @memberof bentoml.GetDeploymentEventRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetDeploymentEventRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetDeploymentEventRequest;
+    })();
+
+    bentoml.GetDeploymentEventResponse = (function() {
+
+        /**
+         * Properties of a GetDeploymentEventResponse.
+         * @memberof bentoml
+         * @interface IGetDeploymentEventResponse
+         * @property {bentoml.IDeploymentEvent|null} [event] GetDeploymentEventResponse event
+         */
+
+        /**
+         * Constructs a new GetDeploymentEventResponse.
+         * @memberof bentoml
+         * @classdesc Represents a GetDeploymentEventResponse.
+         * @implements IGetDeploymentEventResponse
+         * @constructor
+         * @param {bentoml.IGetDeploymentEventResponse=} [properties] Properties to set
+         */
+        function GetDeploymentEventResponse(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GetDeploymentEventResponse event.
+         * @member {bentoml.IDeploymentEvent|null|undefined} event
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @instance
+         */
+        GetDeploymentEventResponse.prototype.event = null;
+
+        /**
+         * Creates a new GetDeploymentEventResponse instance using the specified properties.
+         * @function create
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {bentoml.IGetDeploymentEventResponse=} [properties] Properties to set
+         * @returns {bentoml.GetDeploymentEventResponse} GetDeploymentEventResponse instance
+         */
+        GetDeploymentEventResponse.create = function create(properties) {
+            return new GetDeploymentEventResponse(properties);
+        };
+
+        /**
+         * Encodes the specified GetDeploymentEventResponse message. Does not implicitly {@link bentoml.GetDeploymentEventResponse.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {bentoml.IGetDeploymentEventResponse} message GetDeploymentEventResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetDeploymentEventResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.event != null && Object.hasOwnProperty.call(message, "event"))
+                $root.bentoml.DeploymentEvent.encode(message.event, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetDeploymentEventResponse message, length delimited. Does not implicitly {@link bentoml.GetDeploymentEventResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {bentoml.IGetDeploymentEventResponse} message GetDeploymentEventResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetDeploymentEventResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetDeploymentEventResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.GetDeploymentEventResponse} GetDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetDeploymentEventResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.GetDeploymentEventResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.event = $root.bentoml.DeploymentEvent.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GetDeploymentEventResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.GetDeploymentEventResponse} GetDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetDeploymentEventResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetDeploymentEventResponse message.
+         * @function verify
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetDeploymentEventResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.event != null && message.hasOwnProperty("event")) {
+                let error = $root.bentoml.DeploymentEvent.verify(message.event);
+                if (error)
+                    return "event." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GetDeploymentEventResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.GetDeploymentEventResponse} GetDeploymentEventResponse
+         */
+        GetDeploymentEventResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.GetDeploymentEventResponse)
+                return object;
+            let message = new $root.bentoml.GetDeploymentEventResponse();
+            if (object.event != null) {
+                if (typeof object.event !== "object")
+                    throw TypeError(".bentoml.GetDeploymentEventResponse.event: object expected");
+                message.event = $root.bentoml.DeploymentEvent.fromObject(object.event);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GetDeploymentEventResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @static
+         * @param {bentoml.GetDeploymentEventResponse} message GetDeploymentEventResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetDeploymentEventResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                object.event = null;
+            if (message.event != null && message.hasOwnProperty("event"))
+                object.event = $root.bentoml.DeploymentEvent.toObject(message.event, options);
+            return object;
+        };
+
+        /**
+         * Converts this GetDeploymentEventResponse to JSON.
+         * @function toJSON
+         * @memberof bentoml.GetDeploymentEventResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetDeploymentEventResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetDeploymentEventResponse;
+    })();
+
+    bentoml.ListDeploymentEventsResponse = (function() {
+
+        /**
+         * Properties of a ListDeploymentEventsResponse.
+         * @memberof bentoml
+         * @interface IListDeploymentEventsResponse
+         * @property {bentoml.IStatus|null} [status] ListDeploymentEventsResponse status
+         * @property {Array.<bentoml.IDeploymentEvent>|null} [events] ListDeploymentEventsResponse events
+         */
+
+        /**
+         * Constructs a new ListDeploymentEventsResponse.
+         * @memberof bentoml
+         * @classdesc Represents a ListDeploymentEventsResponse.
+         * @implements IListDeploymentEventsResponse
+         * @constructor
+         * @param {bentoml.IListDeploymentEventsResponse=} [properties] Properties to set
+         */
+        function ListDeploymentEventsResponse(properties) {
+            this.events = [];
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ListDeploymentEventsResponse status.
+         * @member {bentoml.IStatus|null|undefined} status
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @instance
+         */
+        ListDeploymentEventsResponse.prototype.status = null;
+
+        /**
+         * ListDeploymentEventsResponse events.
+         * @member {Array.<bentoml.IDeploymentEvent>} events
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @instance
+         */
+        ListDeploymentEventsResponse.prototype.events = $util.emptyArray;
+
+        /**
+         * Creates a new ListDeploymentEventsResponse instance using the specified properties.
+         * @function create
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {bentoml.IListDeploymentEventsResponse=} [properties] Properties to set
+         * @returns {bentoml.ListDeploymentEventsResponse} ListDeploymentEventsResponse instance
+         */
+        ListDeploymentEventsResponse.create = function create(properties) {
+            return new ListDeploymentEventsResponse(properties);
+        };
+
+        /**
+         * Encodes the specified ListDeploymentEventsResponse message. Does not implicitly {@link bentoml.ListDeploymentEventsResponse.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {bentoml.IListDeploymentEventsResponse} message ListDeploymentEventsResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ListDeploymentEventsResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                $root.bentoml.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.events != null && message.events.length)
+                for (let i = 0; i < message.events.length; ++i)
+                    $root.bentoml.DeploymentEvent.encode(message.events[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ListDeploymentEventsResponse message, length delimited. Does not implicitly {@link bentoml.ListDeploymentEventsResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {bentoml.IListDeploymentEventsResponse} message ListDeploymentEventsResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ListDeploymentEventsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.ListDeploymentEventsResponse} ListDeploymentEventsResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ListDeploymentEventsResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.ListDeploymentEventsResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = $root.bentoml.Status.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    if (!(message.events && message.events.length))
+                        message.events = [];
+                    message.events.push($root.bentoml.DeploymentEvent.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.ListDeploymentEventsResponse} ListDeploymentEventsResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ListDeploymentEventsResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ListDeploymentEventsResponse message.
+         * @function verify
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ListDeploymentEventsResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status")) {
+                let error = $root.bentoml.Status.verify(message.status);
+                if (error)
+                    return "status." + error;
+            }
+            if (message.events != null && message.hasOwnProperty("events")) {
+                if (!Array.isArray(message.events))
+                    return "events: array expected";
+                for (let i = 0; i < message.events.length; ++i) {
+                    let error = $root.bentoml.DeploymentEvent.verify(message.events[i]);
+                    if (error)
+                        return "events." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a ListDeploymentEventsResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.ListDeploymentEventsResponse} ListDeploymentEventsResponse
+         */
+        ListDeploymentEventsResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.ListDeploymentEventsResponse)
+                return object;
+            let message = new $root.bentoml.ListDeploymentEventsResponse();
+            if (object.status != null) {
+                if (typeof object.status !== "object")
+                    throw TypeError(".bentoml.ListDeploymentEventsResponse.status: object expected");
+                message.status = $root.bentoml.Status.fromObject(object.status);
+            }
+            if (object.events) {
+                if (!Array.isArray(object.events))
+                    throw TypeError(".bentoml.ListDeploymentEventsResponse.events: array expected");
+                message.events = [];
+                for (let i = 0; i < object.events.length; ++i) {
+                    if (typeof object.events[i] !== "object")
+                        throw TypeError(".bentoml.ListDeploymentEventsResponse.events: object expected");
+                    message.events[i] = $root.bentoml.DeploymentEvent.fromObject(object.events[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ListDeploymentEventsResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @static
+         * @param {bentoml.ListDeploymentEventsResponse} message ListDeploymentEventsResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ListDeploymentEventsResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.arrays || options.defaults)
+                object.events = [];
+            if (options.defaults)
+                object.status = null;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = $root.bentoml.Status.toObject(message.status, options);
+            if (message.events && message.events.length) {
+                object.events = [];
+                for (let j = 0; j < message.events.length; ++j)
+                    object.events[j] = $root.bentoml.DeploymentEvent.toObject(message.events[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this ListDeploymentEventsResponse to JSON.
+         * @function toJSON
+         * @memberof bentoml.ListDeploymentEventsResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ListDeploymentEventsResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ListDeploymentEventsResponse;
+    })();
+
+    bentoml.AddDeploymentEventRequest = (function() {
+
+        /**
+         * Properties of an AddDeploymentEventRequest.
+         * @memberof bentoml
+         * @interface IAddDeploymentEventRequest
+         * @property {bentoml.IDeploymentEvent|null} [event] AddDeploymentEventRequest event
+         */
+
+        /**
+         * Constructs a new AddDeploymentEventRequest.
+         * @memberof bentoml
+         * @classdesc Represents an AddDeploymentEventRequest.
+         * @implements IAddDeploymentEventRequest
+         * @constructor
+         * @param {bentoml.IAddDeploymentEventRequest=} [properties] Properties to set
+         */
+        function AddDeploymentEventRequest(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AddDeploymentEventRequest event.
+         * @member {bentoml.IDeploymentEvent|null|undefined} event
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @instance
+         */
+        AddDeploymentEventRequest.prototype.event = null;
+
+        /**
+         * Creates a new AddDeploymentEventRequest instance using the specified properties.
+         * @function create
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {bentoml.IAddDeploymentEventRequest=} [properties] Properties to set
+         * @returns {bentoml.AddDeploymentEventRequest} AddDeploymentEventRequest instance
+         */
+        AddDeploymentEventRequest.create = function create(properties) {
+            return new AddDeploymentEventRequest(properties);
+        };
+
+        /**
+         * Encodes the specified AddDeploymentEventRequest message. Does not implicitly {@link bentoml.AddDeploymentEventRequest.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {bentoml.IAddDeploymentEventRequest} message AddDeploymentEventRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AddDeploymentEventRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.event != null && Object.hasOwnProperty.call(message, "event"))
+                $root.bentoml.DeploymentEvent.encode(message.event, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AddDeploymentEventRequest message, length delimited. Does not implicitly {@link bentoml.AddDeploymentEventRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {bentoml.IAddDeploymentEventRequest} message AddDeploymentEventRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AddDeploymentEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an AddDeploymentEventRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.AddDeploymentEventRequest} AddDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AddDeploymentEventRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.AddDeploymentEventRequest();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.event = $root.bentoml.DeploymentEvent.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an AddDeploymentEventRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.AddDeploymentEventRequest} AddDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AddDeploymentEventRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an AddDeploymentEventRequest message.
+         * @function verify
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AddDeploymentEventRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.event != null && message.hasOwnProperty("event")) {
+                let error = $root.bentoml.DeploymentEvent.verify(message.event);
+                if (error)
+                    return "event." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates an AddDeploymentEventRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.AddDeploymentEventRequest} AddDeploymentEventRequest
+         */
+        AddDeploymentEventRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.AddDeploymentEventRequest)
+                return object;
+            let message = new $root.bentoml.AddDeploymentEventRequest();
+            if (object.event != null) {
+                if (typeof object.event !== "object")
+                    throw TypeError(".bentoml.AddDeploymentEventRequest.event: object expected");
+                message.event = $root.bentoml.DeploymentEvent.fromObject(object.event);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AddDeploymentEventRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @static
+         * @param {bentoml.AddDeploymentEventRequest} message AddDeploymentEventRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AddDeploymentEventRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                object.event = null;
+            if (message.event != null && message.hasOwnProperty("event"))
+                object.event = $root.bentoml.DeploymentEvent.toObject(message.event, options);
+            return object;
+        };
+
+        /**
+         * Converts this AddDeploymentEventRequest to JSON.
+         * @function toJSON
+         * @memberof bentoml.AddDeploymentEventRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AddDeploymentEventRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AddDeploymentEventRequest;
+    })();
+
+    bentoml.AddDeploymentEventResponse = (function() {
+
+        /**
+         * Properties of an AddDeploymentEventResponse.
+         * @memberof bentoml
+         * @interface IAddDeploymentEventResponse
+         * @property {bentoml.IStatus|null} [status] AddDeploymentEventResponse status
+         */
+
+        /**
+         * Constructs a new AddDeploymentEventResponse.
+         * @memberof bentoml
+         * @classdesc Represents an AddDeploymentEventResponse.
+         * @implements IAddDeploymentEventResponse
+         * @constructor
+         * @param {bentoml.IAddDeploymentEventResponse=} [properties] Properties to set
+         */
+        function AddDeploymentEventResponse(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AddDeploymentEventResponse status.
+         * @member {bentoml.IStatus|null|undefined} status
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @instance
+         */
+        AddDeploymentEventResponse.prototype.status = null;
+
+        /**
+         * Creates a new AddDeploymentEventResponse instance using the specified properties.
+         * @function create
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {bentoml.IAddDeploymentEventResponse=} [properties] Properties to set
+         * @returns {bentoml.AddDeploymentEventResponse} AddDeploymentEventResponse instance
+         */
+        AddDeploymentEventResponse.create = function create(properties) {
+            return new AddDeploymentEventResponse(properties);
+        };
+
+        /**
+         * Encodes the specified AddDeploymentEventResponse message. Does not implicitly {@link bentoml.AddDeploymentEventResponse.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {bentoml.IAddDeploymentEventResponse} message AddDeploymentEventResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AddDeploymentEventResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                $root.bentoml.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AddDeploymentEventResponse message, length delimited. Does not implicitly {@link bentoml.AddDeploymentEventResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {bentoml.IAddDeploymentEventResponse} message AddDeploymentEventResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AddDeploymentEventResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an AddDeploymentEventResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.AddDeploymentEventResponse} AddDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AddDeploymentEventResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.AddDeploymentEventResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = $root.bentoml.Status.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an AddDeploymentEventResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.AddDeploymentEventResponse} AddDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AddDeploymentEventResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an AddDeploymentEventResponse message.
+         * @function verify
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AddDeploymentEventResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status")) {
+                let error = $root.bentoml.Status.verify(message.status);
+                if (error)
+                    return "status." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates an AddDeploymentEventResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.AddDeploymentEventResponse} AddDeploymentEventResponse
+         */
+        AddDeploymentEventResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.AddDeploymentEventResponse)
+                return object;
+            let message = new $root.bentoml.AddDeploymentEventResponse();
+            if (object.status != null) {
+                if (typeof object.status !== "object")
+                    throw TypeError(".bentoml.AddDeploymentEventResponse.status: object expected");
+                message.status = $root.bentoml.Status.fromObject(object.status);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AddDeploymentEventResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @static
+         * @param {bentoml.AddDeploymentEventResponse} message AddDeploymentEventResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AddDeploymentEventResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                object.status = null;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = $root.bentoml.Status.toObject(message.status, options);
+            return object;
+        };
+
+        /**
+         * Converts this AddDeploymentEventResponse to JSON.
+         * @function toJSON
+         * @memberof bentoml.AddDeploymentEventResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AddDeploymentEventResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AddDeploymentEventResponse;
     })();
 
     bentoml.Status = (function() {

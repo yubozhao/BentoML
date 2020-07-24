@@ -127,6 +127,32 @@ message DeploymentStatus {
   DeploymentState state = 1;
 }
 
+message DeploymentEvent {
+    enum EventType {
+        CREATE = 0;
+        UPDATE = 1;
+        DELETE = 2;
+    }
+
+    message EventStatus {
+      enum State {
+        SUCCEEDED = 0;
+        FAILED = 1;
+      }
+
+      State state = 1;
+      string error_message = 2;
+    }
+
+    string id = 1;
+    string namespace = 2;
+    string name = 3;
+    DeploymentSpec spec = 4;
+    EventType event_type = 5;
+    EventStatus status = 6;
+    google.protobuf.Timestamp created_at = 7;
+}
+
 
 message ApplyDeploymentRequest {
   Deployment deployment = 1;
@@ -189,4 +215,36 @@ message ListDeploymentsRequest {
 message ListDeploymentsResponse {
   Status status = 1;
   repeated Deployment deployments = 2;
+}
+
+message ListDeploymentEventsRequest {
+  string name = 1;
+  string namespace = 2;
+  DeploymentSpec.DeploymentOperator operator = 3;
+  DeploymentEvent.EventType event_type = 4;
+  DeploymentEvent.EventStatus.State status = 5;
+  int32 offset = 6;
+  int32 limit = 7;
+  bool ascending_order = 8;
+}
+
+message GetDeploymentEventRequest {
+  string id = 1;
+}
+
+message GetDeploymentEventResponse {
+  DeploymentEvent event = 1;
+}
+
+message ListDeploymentEventsResponse {
+  Status status = 1;
+  repeated DeploymentEvent events = 2;
+}
+
+message AddDeploymentEventRequest {
+  DeploymentEvent event = 1;
+}
+
+message AddDeploymentEventResponse {
+  Status status = 1;
 }

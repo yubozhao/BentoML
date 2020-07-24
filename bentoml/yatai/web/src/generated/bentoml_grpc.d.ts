@@ -927,6 +927,247 @@ export namespace bentoml {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a DeploymentEvent. */
+    interface IDeploymentEvent {
+
+        /** DeploymentEvent id */
+        id?: (string|null);
+
+        /** DeploymentEvent namespace */
+        namespace?: (string|null);
+
+        /** DeploymentEvent name */
+        name?: (string|null);
+
+        /** DeploymentEvent spec */
+        spec?: (bentoml.IDeploymentSpec|null);
+
+        /** DeploymentEvent event_type */
+        event_type?: (bentoml.DeploymentEvent.EventType|null);
+
+        /** DeploymentEvent status */
+        status?: (bentoml.DeploymentEvent.IEventStatus|null);
+
+        /** DeploymentEvent created_at */
+        created_at?: (google.protobuf.ITimestamp|null);
+    }
+
+    /** Represents a DeploymentEvent. */
+    class DeploymentEvent implements IDeploymentEvent {
+
+        /**
+         * Constructs a new DeploymentEvent.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IDeploymentEvent);
+
+        /** DeploymentEvent id. */
+        public id: string;
+
+        /** DeploymentEvent namespace. */
+        public namespace: string;
+
+        /** DeploymentEvent name. */
+        public name: string;
+
+        /** DeploymentEvent spec. */
+        public spec?: (bentoml.IDeploymentSpec|null);
+
+        /** DeploymentEvent event_type. */
+        public event_type: bentoml.DeploymentEvent.EventType;
+
+        /** DeploymentEvent status. */
+        public status?: (bentoml.DeploymentEvent.IEventStatus|null);
+
+        /** DeploymentEvent created_at. */
+        public created_at?: (google.protobuf.ITimestamp|null);
+
+        /**
+         * Creates a new DeploymentEvent instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns DeploymentEvent instance
+         */
+        public static create(properties?: bentoml.IDeploymentEvent): bentoml.DeploymentEvent;
+
+        /**
+         * Encodes the specified DeploymentEvent message. Does not implicitly {@link bentoml.DeploymentEvent.verify|verify} messages.
+         * @param message DeploymentEvent message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IDeploymentEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified DeploymentEvent message, length delimited. Does not implicitly {@link bentoml.DeploymentEvent.verify|verify} messages.
+         * @param message DeploymentEvent message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IDeploymentEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a DeploymentEvent message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns DeploymentEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.DeploymentEvent;
+
+        /**
+         * Decodes a DeploymentEvent message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns DeploymentEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.DeploymentEvent;
+
+        /**
+         * Verifies a DeploymentEvent message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a DeploymentEvent message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns DeploymentEvent
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.DeploymentEvent;
+
+        /**
+         * Creates a plain object from a DeploymentEvent message. Also converts values to other types if specified.
+         * @param message DeploymentEvent
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.DeploymentEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this DeploymentEvent to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    namespace DeploymentEvent {
+
+        /** EventType enum. */
+        enum EventType {
+            CREATE = 0,
+            UPDATE = 1,
+            DELETE = 2
+        }
+
+        /** Properties of an EventStatus. */
+        interface IEventStatus {
+
+            /** EventStatus state */
+            state?: (bentoml.DeploymentEvent.EventStatus.State|null);
+
+            /** EventStatus error_message */
+            error_message?: (string|null);
+        }
+
+        /** Represents an EventStatus. */
+        class EventStatus implements IEventStatus {
+
+            /**
+             * Constructs a new EventStatus.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: bentoml.DeploymentEvent.IEventStatus);
+
+            /** EventStatus state. */
+            public state: bentoml.DeploymentEvent.EventStatus.State;
+
+            /** EventStatus error_message. */
+            public error_message: string;
+
+            /**
+             * Creates a new EventStatus instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns EventStatus instance
+             */
+            public static create(properties?: bentoml.DeploymentEvent.IEventStatus): bentoml.DeploymentEvent.EventStatus;
+
+            /**
+             * Encodes the specified EventStatus message. Does not implicitly {@link bentoml.DeploymentEvent.EventStatus.verify|verify} messages.
+             * @param message EventStatus message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: bentoml.DeploymentEvent.IEventStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified EventStatus message, length delimited. Does not implicitly {@link bentoml.DeploymentEvent.EventStatus.verify|verify} messages.
+             * @param message EventStatus message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: bentoml.DeploymentEvent.IEventStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an EventStatus message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns EventStatus
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.DeploymentEvent.EventStatus;
+
+            /**
+             * Decodes an EventStatus message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns EventStatus
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.DeploymentEvent.EventStatus;
+
+            /**
+             * Verifies an EventStatus message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an EventStatus message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns EventStatus
+             */
+            public static fromObject(object: { [k: string]: any }): bentoml.DeploymentEvent.EventStatus;
+
+            /**
+             * Creates a plain object from an EventStatus message. Also converts values to other types if specified.
+             * @param message EventStatus
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: bentoml.DeploymentEvent.EventStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this EventStatus to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace EventStatus {
+
+            /** State enum. */
+            enum State {
+                SUCCEEDED = 0,
+                FAILED = 1
+            }
+        }
+    }
+
     /** Properties of an ApplyDeploymentRequest. */
     interface IApplyDeploymentRequest {
 
@@ -1915,6 +2156,594 @@ export namespace bentoml {
 
         /**
          * Converts this ListDeploymentsResponse to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ListDeploymentEventsRequest. */
+    interface IListDeploymentEventsRequest {
+
+        /** ListDeploymentEventsRequest name */
+        name?: (string|null);
+
+        /** ListDeploymentEventsRequest namespace */
+        namespace?: (string|null);
+
+        /** ListDeploymentEventsRequest operator */
+        operator?: (bentoml.DeploymentSpec.DeploymentOperator|null);
+
+        /** ListDeploymentEventsRequest event_type */
+        event_type?: (bentoml.DeploymentEvent.EventType|null);
+
+        /** ListDeploymentEventsRequest status */
+        status?: (bentoml.DeploymentEvent.EventStatus.State|null);
+
+        /** ListDeploymentEventsRequest offset */
+        offset?: (number|null);
+
+        /** ListDeploymentEventsRequest limit */
+        limit?: (number|null);
+
+        /** ListDeploymentEventsRequest ascending_order */
+        ascending_order?: (boolean|null);
+    }
+
+    /** Represents a ListDeploymentEventsRequest. */
+    class ListDeploymentEventsRequest implements IListDeploymentEventsRequest {
+
+        /**
+         * Constructs a new ListDeploymentEventsRequest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IListDeploymentEventsRequest);
+
+        /** ListDeploymentEventsRequest name. */
+        public name: string;
+
+        /** ListDeploymentEventsRequest namespace. */
+        public namespace: string;
+
+        /** ListDeploymentEventsRequest operator. */
+        public operator: bentoml.DeploymentSpec.DeploymentOperator;
+
+        /** ListDeploymentEventsRequest event_type. */
+        public event_type: bentoml.DeploymentEvent.EventType;
+
+        /** ListDeploymentEventsRequest status. */
+        public status: bentoml.DeploymentEvent.EventStatus.State;
+
+        /** ListDeploymentEventsRequest offset. */
+        public offset: number;
+
+        /** ListDeploymentEventsRequest limit. */
+        public limit: number;
+
+        /** ListDeploymentEventsRequest ascending_order. */
+        public ascending_order: boolean;
+
+        /**
+         * Creates a new ListDeploymentEventsRequest instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ListDeploymentEventsRequest instance
+         */
+        public static create(properties?: bentoml.IListDeploymentEventsRequest): bentoml.ListDeploymentEventsRequest;
+
+        /**
+         * Encodes the specified ListDeploymentEventsRequest message. Does not implicitly {@link bentoml.ListDeploymentEventsRequest.verify|verify} messages.
+         * @param message ListDeploymentEventsRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IListDeploymentEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ListDeploymentEventsRequest message, length delimited. Does not implicitly {@link bentoml.ListDeploymentEventsRequest.verify|verify} messages.
+         * @param message ListDeploymentEventsRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IListDeploymentEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ListDeploymentEventsRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.ListDeploymentEventsRequest;
+
+        /**
+         * Decodes a ListDeploymentEventsRequest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ListDeploymentEventsRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.ListDeploymentEventsRequest;
+
+        /**
+         * Verifies a ListDeploymentEventsRequest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ListDeploymentEventsRequest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ListDeploymentEventsRequest
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.ListDeploymentEventsRequest;
+
+        /**
+         * Creates a plain object from a ListDeploymentEventsRequest message. Also converts values to other types if specified.
+         * @param message ListDeploymentEventsRequest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.ListDeploymentEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ListDeploymentEventsRequest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GetDeploymentEventRequest. */
+    interface IGetDeploymentEventRequest {
+
+        /** GetDeploymentEventRequest id */
+        id?: (string|null);
+    }
+
+    /** Represents a GetDeploymentEventRequest. */
+    class GetDeploymentEventRequest implements IGetDeploymentEventRequest {
+
+        /**
+         * Constructs a new GetDeploymentEventRequest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IGetDeploymentEventRequest);
+
+        /** GetDeploymentEventRequest id. */
+        public id: string;
+
+        /**
+         * Creates a new GetDeploymentEventRequest instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GetDeploymentEventRequest instance
+         */
+        public static create(properties?: bentoml.IGetDeploymentEventRequest): bentoml.GetDeploymentEventRequest;
+
+        /**
+         * Encodes the specified GetDeploymentEventRequest message. Does not implicitly {@link bentoml.GetDeploymentEventRequest.verify|verify} messages.
+         * @param message GetDeploymentEventRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IGetDeploymentEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GetDeploymentEventRequest message, length delimited. Does not implicitly {@link bentoml.GetDeploymentEventRequest.verify|verify} messages.
+         * @param message GetDeploymentEventRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IGetDeploymentEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GetDeploymentEventRequest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GetDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.GetDeploymentEventRequest;
+
+        /**
+         * Decodes a GetDeploymentEventRequest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GetDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.GetDeploymentEventRequest;
+
+        /**
+         * Verifies a GetDeploymentEventRequest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GetDeploymentEventRequest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GetDeploymentEventRequest
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.GetDeploymentEventRequest;
+
+        /**
+         * Creates a plain object from a GetDeploymentEventRequest message. Also converts values to other types if specified.
+         * @param message GetDeploymentEventRequest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.GetDeploymentEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GetDeploymentEventRequest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GetDeploymentEventResponse. */
+    interface IGetDeploymentEventResponse {
+
+        /** GetDeploymentEventResponse event */
+        event?: (bentoml.IDeploymentEvent|null);
+    }
+
+    /** Represents a GetDeploymentEventResponse. */
+    class GetDeploymentEventResponse implements IGetDeploymentEventResponse {
+
+        /**
+         * Constructs a new GetDeploymentEventResponse.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IGetDeploymentEventResponse);
+
+        /** GetDeploymentEventResponse event. */
+        public event?: (bentoml.IDeploymentEvent|null);
+
+        /**
+         * Creates a new GetDeploymentEventResponse instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GetDeploymentEventResponse instance
+         */
+        public static create(properties?: bentoml.IGetDeploymentEventResponse): bentoml.GetDeploymentEventResponse;
+
+        /**
+         * Encodes the specified GetDeploymentEventResponse message. Does not implicitly {@link bentoml.GetDeploymentEventResponse.verify|verify} messages.
+         * @param message GetDeploymentEventResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IGetDeploymentEventResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GetDeploymentEventResponse message, length delimited. Does not implicitly {@link bentoml.GetDeploymentEventResponse.verify|verify} messages.
+         * @param message GetDeploymentEventResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IGetDeploymentEventResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GetDeploymentEventResponse message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GetDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.GetDeploymentEventResponse;
+
+        /**
+         * Decodes a GetDeploymentEventResponse message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GetDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.GetDeploymentEventResponse;
+
+        /**
+         * Verifies a GetDeploymentEventResponse message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GetDeploymentEventResponse message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GetDeploymentEventResponse
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.GetDeploymentEventResponse;
+
+        /**
+         * Creates a plain object from a GetDeploymentEventResponse message. Also converts values to other types if specified.
+         * @param message GetDeploymentEventResponse
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.GetDeploymentEventResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GetDeploymentEventResponse to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ListDeploymentEventsResponse. */
+    interface IListDeploymentEventsResponse {
+
+        /** ListDeploymentEventsResponse status */
+        status?: (bentoml.IStatus|null);
+
+        /** ListDeploymentEventsResponse events */
+        events?: (bentoml.IDeploymentEvent[]|null);
+    }
+
+    /** Represents a ListDeploymentEventsResponse. */
+    class ListDeploymentEventsResponse implements IListDeploymentEventsResponse {
+
+        /**
+         * Constructs a new ListDeploymentEventsResponse.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IListDeploymentEventsResponse);
+
+        /** ListDeploymentEventsResponse status. */
+        public status?: (bentoml.IStatus|null);
+
+        /** ListDeploymentEventsResponse events. */
+        public events: bentoml.IDeploymentEvent[];
+
+        /**
+         * Creates a new ListDeploymentEventsResponse instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ListDeploymentEventsResponse instance
+         */
+        public static create(properties?: bentoml.IListDeploymentEventsResponse): bentoml.ListDeploymentEventsResponse;
+
+        /**
+         * Encodes the specified ListDeploymentEventsResponse message. Does not implicitly {@link bentoml.ListDeploymentEventsResponse.verify|verify} messages.
+         * @param message ListDeploymentEventsResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IListDeploymentEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ListDeploymentEventsResponse message, length delimited. Does not implicitly {@link bentoml.ListDeploymentEventsResponse.verify|verify} messages.
+         * @param message ListDeploymentEventsResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IListDeploymentEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ListDeploymentEventsResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.ListDeploymentEventsResponse;
+
+        /**
+         * Decodes a ListDeploymentEventsResponse message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ListDeploymentEventsResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.ListDeploymentEventsResponse;
+
+        /**
+         * Verifies a ListDeploymentEventsResponse message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ListDeploymentEventsResponse message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ListDeploymentEventsResponse
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.ListDeploymentEventsResponse;
+
+        /**
+         * Creates a plain object from a ListDeploymentEventsResponse message. Also converts values to other types if specified.
+         * @param message ListDeploymentEventsResponse
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.ListDeploymentEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ListDeploymentEventsResponse to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an AddDeploymentEventRequest. */
+    interface IAddDeploymentEventRequest {
+
+        /** AddDeploymentEventRequest event */
+        event?: (bentoml.IDeploymentEvent|null);
+    }
+
+    /** Represents an AddDeploymentEventRequest. */
+    class AddDeploymentEventRequest implements IAddDeploymentEventRequest {
+
+        /**
+         * Constructs a new AddDeploymentEventRequest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IAddDeploymentEventRequest);
+
+        /** AddDeploymentEventRequest event. */
+        public event?: (bentoml.IDeploymentEvent|null);
+
+        /**
+         * Creates a new AddDeploymentEventRequest instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AddDeploymentEventRequest instance
+         */
+        public static create(properties?: bentoml.IAddDeploymentEventRequest): bentoml.AddDeploymentEventRequest;
+
+        /**
+         * Encodes the specified AddDeploymentEventRequest message. Does not implicitly {@link bentoml.AddDeploymentEventRequest.verify|verify} messages.
+         * @param message AddDeploymentEventRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IAddDeploymentEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AddDeploymentEventRequest message, length delimited. Does not implicitly {@link bentoml.AddDeploymentEventRequest.verify|verify} messages.
+         * @param message AddDeploymentEventRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IAddDeploymentEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AddDeploymentEventRequest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AddDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.AddDeploymentEventRequest;
+
+        /**
+         * Decodes an AddDeploymentEventRequest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AddDeploymentEventRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.AddDeploymentEventRequest;
+
+        /**
+         * Verifies an AddDeploymentEventRequest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AddDeploymentEventRequest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AddDeploymentEventRequest
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.AddDeploymentEventRequest;
+
+        /**
+         * Creates a plain object from an AddDeploymentEventRequest message. Also converts values to other types if specified.
+         * @param message AddDeploymentEventRequest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.AddDeploymentEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AddDeploymentEventRequest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an AddDeploymentEventResponse. */
+    interface IAddDeploymentEventResponse {
+
+        /** AddDeploymentEventResponse status */
+        status?: (bentoml.IStatus|null);
+    }
+
+    /** Represents an AddDeploymentEventResponse. */
+    class AddDeploymentEventResponse implements IAddDeploymentEventResponse {
+
+        /**
+         * Constructs a new AddDeploymentEventResponse.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: bentoml.IAddDeploymentEventResponse);
+
+        /** AddDeploymentEventResponse status. */
+        public status?: (bentoml.IStatus|null);
+
+        /**
+         * Creates a new AddDeploymentEventResponse instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AddDeploymentEventResponse instance
+         */
+        public static create(properties?: bentoml.IAddDeploymentEventResponse): bentoml.AddDeploymentEventResponse;
+
+        /**
+         * Encodes the specified AddDeploymentEventResponse message. Does not implicitly {@link bentoml.AddDeploymentEventResponse.verify|verify} messages.
+         * @param message AddDeploymentEventResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: bentoml.IAddDeploymentEventResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AddDeploymentEventResponse message, length delimited. Does not implicitly {@link bentoml.AddDeploymentEventResponse.verify|verify} messages.
+         * @param message AddDeploymentEventResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: bentoml.IAddDeploymentEventResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AddDeploymentEventResponse message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AddDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.AddDeploymentEventResponse;
+
+        /**
+         * Decodes an AddDeploymentEventResponse message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AddDeploymentEventResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.AddDeploymentEventResponse;
+
+        /**
+         * Verifies an AddDeploymentEventResponse message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AddDeploymentEventResponse message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AddDeploymentEventResponse
+         */
+        public static fromObject(object: { [k: string]: any }): bentoml.AddDeploymentEventResponse;
+
+        /**
+         * Creates a plain object from an AddDeploymentEventResponse message. Also converts values to other types if specified.
+         * @param message AddDeploymentEventResponse
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: bentoml.AddDeploymentEventResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AddDeploymentEventResponse to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
