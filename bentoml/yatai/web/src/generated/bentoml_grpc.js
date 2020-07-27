@@ -2655,6 +2655,7 @@ export const bentoml = $root.bentoml = (() => {
                 case 0:
                 case 1:
                 case 2:
+                case 3:
                     break;
                 }
             if (message.status != null && message.hasOwnProperty("status")) {
@@ -2705,6 +2706,10 @@ export const bentoml = $root.bentoml = (() => {
             case "DELETE":
             case 2:
                 message.event_type = 2;
+                break;
+            case "APPLY":
+            case 3:
+                message.event_type = 3;
                 break;
             }
             if (object.status != null) {
@@ -2777,12 +2782,14 @@ export const bentoml = $root.bentoml = (() => {
          * @property {number} CREATE=0 CREATE value
          * @property {number} UPDATE=1 UPDATE value
          * @property {number} DELETE=2 DELETE value
+         * @property {number} APPLY=3 APPLY value
          */
         DeploymentEvent.EventType = (function() {
             const valuesById = {}, values = Object.create(valuesById);
             values[valuesById[0] = "CREATE"] = 0;
             values[valuesById[1] = "UPDATE"] = 1;
             values[valuesById[2] = "DELETE"] = 2;
+            values[valuesById[3] = "APPLY"] = 3;
             return values;
         })();
 
@@ -5585,6 +5592,7 @@ export const bentoml = $root.bentoml = (() => {
                 case 0:
                 case 1:
                 case 2:
+                case 3:
                     break;
                 }
             if (message.status != null && message.hasOwnProperty("status"))
@@ -5657,6 +5665,10 @@ export const bentoml = $root.bentoml = (() => {
             case "DELETE":
             case 2:
                 message.event_type = 2;
+                break;
+            case "APPLY":
+            case 3:
+                message.event_type = 3;
                 break;
             }
             switch (object.status) {

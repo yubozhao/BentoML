@@ -1059,7 +1059,8 @@ export namespace bentoml {
         enum EventType {
             CREATE = 0,
             UPDATE = 1,
-            DELETE = 2
+            DELETE = 2,
+            APPLY = 3
         }
 
         /** Properties of an EventStatus. */
