@@ -23,6 +23,10 @@ from bentoml.yatai.proto.deployment_pb2 import (
     ApplyDeploymentResponse,
     DeleteDeploymentResponse,
     DeploymentSpec,
+    ListDeploymentEventsResponse,
+    AddDeploymentEventResponse,
+    DeploymentEvent,
+    AddDeploymentEventRequest,
 )
 from bentoml.yatai.proto.repository_pb2 import (
     AddBentoResponse,
@@ -52,6 +56,12 @@ from bentoml import __version__ as BENTOML_VERSION
 
 logger = logging.getLogger(__name__)
 
+DEPLOYMENT_EVENT_TYPE = {
+    'create': DeploymentEvent.EventType.CREATE,
+    'update': DeploymentEvent.EventType.UPDATE,
+    'delete': DeploymentEvent.EventType.DELETE,
+}
+
 
 def track_deployment_delete(deployment_operator, created_at, force_delete=False):
     operator_name = DeploymentSpec.DeploymentOperator.Name(deployment_operator)
@@ -60,6 +70,35 @@ def track_deployment_delete(deployment_operator, created_at, force_delete=False)
         f'deployment-{operator_name}-stop',
         {'up_time': up_time, 'force_delete': force_delete},
     )
+
+
+def _create_deployment_event(
+    deployment_store, name, namespace, event_type, spec=None, error_message=None
+):
+    deployment_event = DeploymentEvent(
+        name=name,
+        namespace=namespace,
+        event_type=event_type,
+        status=DeploymentEvent.EventStatus(
+            state=DeploymentEvent.EventStatus.State.SUCCEEDED
+        ),
+    )
+    if spec:
+        deployment_event.spec = spec
+    if error_message:
+        deployment_event.status = DeploymentEvent.EventStatus(
+            state=DeploymentEvent.EventStatus.State.FAILED, error_message=error_message,
+        )
+    else:
+        deployment_event.status = DeploymentEvent.EventStatus(
+            state=DeploymentEvent.EventStatus.State.SUCCEEDED
+        )
+    try:
+        deployment_store.insert_event(deployment_event)
+    except BentoMLException as e:
+        logger.error("")
+    except Exception as e:
+        logger.error("")
 
 
 class YataiService(YataiServicer):
@@ -183,6 +222,14 @@ class YataiService(YataiServicer):
                     self.deployment_store.delete(
                         request.deployment_name, request.namespace
                     )
+
+                    _create_deployment_event(
+                        deployment_store=self.deployment_store,
+                        name=deployment_pb.name,
+                        namespace=deployment_pb.namespace,
+                        spec=deployment_pb.spec,
+                        event_type=DEPLOYMENT_EVENT_TYPE['delete'],
+                    )
                     return response
 
                 # If force delete flag is True, we will remove the record
@@ -195,6 +242,13 @@ class YataiService(YataiServicer):
                     self.deployment_store.delete(
                         request.deployment_name, request.namespace
                     )
+                    _create_deployment_event(
+                        deployment_store=self.deployment_store,
+                        name=deployment_pb.name,
+                        namespace=deployment_pb.namespace,
+                        spec=deployment_pb.spec,
+                        event_type=DEPLOYMENT_EVENT_TYPE['delete'],
+                    )
                     return DeleteDeploymentResponse(status=Status.OK())
 
                 if response.status.status_code == status_pb2.Status.NOT_FOUND:
@@ -206,10 +260,27 @@ class YataiService(YataiServicer):
                             response.status.error_message
                         )
                     )
+                    _create_deployment_event(
+                        deployment_store=self.deployment_store,
+                        name=deployment_pb.name,
+                        namespace=deployment_pb.namespace,
+                        spec=deployment_pb.spec,
+                        event_type=DEPLOYMENT_EVENT_TYPE['delete'],
+                        error_message=f'Cloud resources not found. '
+                                      f'{response.status.error_message}',
+                    )
                     response.status.error_message = modified_message
 
                 return response
             else:
+                _create_deployment_event(
+                    deployment_store=self.deployment_store,
+                    name=request.deployment_name,
+                    namespace=request.namespace,
+                    event_type=DEPLOYMENT_EVENT_TYPE['delete'],
+                    error_message=f'Deployment "{request.deployment_name}" in '
+                    f'namespace "{request.namespace}" not found',
+                )
                 return DeleteDeploymentResponse(
                     status=Status.NOT_FOUND(
                         'Deployment "{}" in namespace "{}" not found'.format(
@@ -219,9 +290,23 @@ class YataiService(YataiServicer):
                 )
 
         except BentoMLException as e:
+            _create_deployment_event(
+                deployment_store=self.deployment_store,
+                name=request.deployment_name,
+                namespace=request.namespace,
+                event_type=DEPLOYMENT_EVENT_TYPE['delete'],
+                error_message=e
+            )
             logger.error("RPC ERROR DeleteDeployment: %s", e)
             return DeleteDeploymentResponse(status=e.status_proto)
         except Exception as e:  # pylint: disable=broad-except
+            _create_deployment_event(
+                deployment_store=self.deployment_store,
+                name=request.deployment_name,
+                namespace=request.namespace,
+                event_type=DEPLOYMENT_EVENT_TYPE['delete'],
+                error_message=e
+            )
             logger.error("RPC ERROR DeleteDeployment: %s", e)
             return DeleteDeploymentResponse(status=Status.INTERNAL(str(e)))
 
@@ -306,6 +391,28 @@ class YataiService(YataiServicer):
         except Exception as e:  # pylint: disable=broad-except
             logger.error("RPC ERROR ListDeployments: %s", e)
             return DeleteDeploymentResponse(status=Status.INTERNAL())
+
+    def ListDeploymentEvents(self, request, context=None):
+        try:
+            namespace = request.namespace or self.default_namespace
+            deployment_events = self.deployment_store.list_events(
+                namespace=namespace,
+                name=request.name,
+                limit=request.limit,
+                offset=request.offset,
+                operator=request.operator,
+                event_type=request.event_type,
+                ascending_order=request.ascending_order,
+            )
+            return ListDeploymentEventsResponse(
+                status=Status.OK(), events=deployment_events
+            )
+        except BentoMLException as e:
+            logger.error("RPC ERROR ListDeploymentEvents: %s", e)
+            return ListDeploymentEventsResponse(status=e.status_proto)
+        except Exception as e:
+            logger.error("RPC ERROR ListDeploymentEvents: %s", e)
+            return ListDeploymentEventsResponse(status=Status.INTERNAL())
 
     def AddBento(self, request, context=None):
         try:

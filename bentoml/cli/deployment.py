@@ -228,4 +228,23 @@ def get_deployment_sub_command():
             raise CLIException(f'{error_code}:{error_message}')
         _print_deployments_info(list_result.deployments, output)
 
+    @deployment.command(name='events')
+    @click.option('--name', type=click.STRING, help='')
+    @click.option('--namespace', type=click.STRING, help='')
+    @click.option('--platform', type=click.STRING, help='enum')
+    @click.option('--event-type', type=click.STRING, help='enum')
+    @click.option(
+        '--limit',
+        type=click.INT,
+        help='The maximum amount of deployments to be listed at once',
+    )
+    @click.option(
+        '--asc/--desc',
+        default=False,
+        help='Ascending or descending order for list deployments',
+    )
+    def list_deployment_event(name, namespace, platform, event_type, limit, asc):
+        # bentoml deployment events --name my-deployment --action update
+        pass
+
     return deployment

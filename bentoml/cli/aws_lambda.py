@@ -317,4 +317,27 @@ def get_aws_lambda_sub_command():
         else:
             _print_deployments_info(list_result.deployments, output)
 
+    @aws_lambda.command()
+    @click.option('--name', type=click.STRING, help='')
+    @click.option(
+        '--namespace',
+        type=click.STRING,
+        help='Deployment namespace managed by BentoML, default value is "dev" which'
+        'can be changed in BentoML configuration yatai_service/default_namespace',
+        default=ALL_NAMESPACE_TAG,
+    )
+    @click.option('--event-type', type=click.STRING, help='enum')
+    @click.option(
+        '--limit',
+        type=click.INT,
+        help='The maximum amount of AWS Lambda deployments to be listed at once',
+    )
+    @click.option(
+        '--asc/--desc',
+        default=False,
+        help='Ascending or descending order for list deployments',
+    )
+    def events(name, namespace, event_type, limit, asc):
+        pass
+
     return aws_lambda

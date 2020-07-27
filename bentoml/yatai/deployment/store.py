@@ -14,6 +14,7 @@
 
 import logging
 import datetime
+import uuid
 from contextlib import contextmanager
 
 from sqlalchemy import (
@@ -27,6 +28,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm.exc import NoResultFound
 from google.protobuf.json_format import ParseDict
+from sqlalchemy_utils import UUIDType
 
 from bentoml.exceptions import YataiDeploymentException, BadInput
 from bentoml.yatai.db import Base, create_session
@@ -56,6 +58,50 @@ class Deployment(Base):
 
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     last_updated_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+
+class DeploymentEvent(Base):
+    __tablename__ = 'deployment_events'
+
+    id = Column(UUIDType(binary=False), primary_key=True)
+    name = Column(String, nullable=False)
+    namespace = Column(String, nullable=False)
+    spec = Column(JSON, nullable=False, default={})
+    event_type = Column(String, nullable=False)
+    status = Column(JSON, nullable=False)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+
+def _deployment_event_pb_to_orm_obj(
+    deployment_event_pb, deployment_event_obj=DeploymentEvent()
+):
+    deployment_event_obj.id = uuid.uuid4().hex
+    deployment_event_obj.name = deployment_event_pb.name
+    deployment_event_obj.namespace = deployment_event_pb.namespace
+    deployment_event_obj.spec = ProtoMessageToDict(deployment_event_pb.spec)
+    deployment_event_obj.event_type = deployment_pb2.DeploymentEvent.EventType.Name(
+        deployment_event_pb.event_type
+    )
+    deployment_event_obj.status = ProtoMessageToDict(deployment_event_pb.status)
+    deployment_event_obj.created_at = deployment_event_pb.created_at.ToDatetime()
+    return deployment_event_obj
+
+
+def _deployment_event_orm_obj_to_pb(deployment_event_obj):
+    deployment_event_pb = deployment_pb2.DeploymentEvent(
+        id=deployment_event_obj.id,
+        name=deployment_event_obj.name,
+        namespace=deployment_event_obj.namespace,
+        spec=ParseDict(deployment_event_obj.spec, deployment_pb2.DeploymentSpec()),
+        event_type=deployment_pb2.DeploymentEvent.EventStatus.Status.Value(
+            deployment_event_obj.event_type
+        ),
+        status=ParseDict(
+            deployment_event_obj.status, deployment_pb2.DeploymentEvent.EventStatus()
+        ),
+    )
+    deployment_event_pb.created_at.FromDatetime(deployment_event_obj.created_at)
+    return deployment_event_pb
 
 
 def _deployment_pb_to_orm_obj(deployment_pb, deployment_obj=Deployment()):
@@ -201,3 +247,50 @@ class DeploymentStore(object):
             query_result = query.all()
 
             return list(map(_deployment_orm_obj_to_pb, query_result))
+
+    def list_events(
+        self,
+        namespace,
+        name=None,
+        operator=None,
+        event_type=None,
+        offset=None,
+        limit=None,
+        order_by=None,
+        ascending_order=False,
+    ):
+        with create_session(self.sess_maker) as sess:
+            query = sess.query(DeploymentEvent)
+            order_by = ListDeploymentsRequest.SORTABLE_COLUMN.Name('created_at')
+            order_by_field = getattr(DeploymentEvent, order_by)
+            order_by_action = (
+                order_by_field if ascending_order else desc(order_by_field)
+            )
+            query = query.order_by(order_by_action)
+            if namespace != ALL_NAMESPACE_TAG:  # else query all namespaces
+                query = query.filter_by(namespace=namespace)
+            if name:
+                query = query.filter_by(name=name)
+            if event_type:
+                query = query.filter_by(event_type=event_type)
+            if operator:
+                operator_name = DeploymentSpec.DeploymentOperator.Name(operator)
+                query = query.filter(
+                    DeploymentEvent.spec['operator'].contains(operator_name)
+                )
+            # We are not defaulting limit to 200 in the signature,
+            # because protobuf will pass 0 as value
+            limit = limit or 200
+            # Limit and offset need to be called after order_by filter/filter_by is
+            # called
+            query = query.limit(limit)
+            if offset:
+                query = query.offset(offset)
+            query_result = query.all()
+
+            return list(map(_deployment_event_orm_obj_to_pb, query_result))
+
+    def insert_event(self, deployment_event_pb):
+        with create_session(self.sess_maker) as sess:
+            deployment_obj = _deployment_event_pb_to_orm_obj(deployment_event_pb)
+            return sess.add(deployment_obj)

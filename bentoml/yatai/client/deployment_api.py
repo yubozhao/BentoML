@@ -205,6 +205,9 @@ class DeploymentAPIClient:
                 break
         return result
 
+    def list_deployment_events(self):
+        pass
+
     def create_sagemaker_deployment(
         self,
         name,
