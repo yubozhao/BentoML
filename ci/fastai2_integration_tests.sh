@@ -11,7 +11,7 @@ cd "$GIT_ROOT" || exit
 
 
 # Install required packages for fastai2 model artifacts test
-pip install fastai2 fastcore
+pip install fastai2 fastcore torch torchvision IPython
 
 pytest -s "$GIT_ROOT"/tests/integration/test_fastai2_model_artifact.py --cov=bentoml --cov-config=.coveragerc
 
