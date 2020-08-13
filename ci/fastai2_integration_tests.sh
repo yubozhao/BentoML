@@ -10,8 +10,8 @@ GIT_ROOT=$(git rev-parse --show-toplevel)
 cd "$GIT_ROOT" || exit
 
 
-# Install required packages for h2o model artifacts test
-pip install h2o
+# Install required packages for fastai2 model artifacts test
+pip install fastai2 fastcore
 
 pytest -s "$GIT_ROOT"/tests/integration/test_fastai2_model_artifact.py --cov=bentoml --cov-config=.coveragerc
 
