@@ -24,7 +24,7 @@ If models are already saved to file, they can also be brought to BentoML with th
     from sklearn import svm
     from sklearn import datasets
 
-    import bentoml.sklearn
+    import bentoml
 
     # Load training data
     iris = datasets.load_iris()
@@ -68,7 +68,6 @@ like `pandas.dataframe` and `PIL.image` are also supported IO types, see @API an
 
     # bento.py
     import bentoml
-    import bentoml.sklearn
     import numpy as np
 
     from bentoml.io import NumpyNdarray
