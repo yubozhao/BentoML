@@ -1,0 +1,15 @@
+service: "service:svc"
+description: "Iris classification model for AWS SageMaker deployment"
+labels:
+  owner: bentoml-team
+  project: iris-classification
+  environment: production
+include:
+  - "*.py"
+python:
+  packages:
+    - scikit-learn
+    - numpy
+docker:
+  python_version: "3.10"
+  distro: debian
